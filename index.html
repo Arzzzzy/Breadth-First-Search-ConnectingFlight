@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AirAsia.com</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="airasia.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+</head>
+<body>
+    <div class="title">Philippines AirAsia</div>
+    
+    <div class="color-container">
+        <div class="color-circle red"></div>
+        <span>Possible Path (Edges)</span>
+        <div class="color-circle blue"></div>
+        <span>Shortest Path (Breadth-first searh)</span>
+        <div class="icon-location">
+            <i class='fas fa-map-marker-alt' style='font-size: 24px; color: rgb(76, 76, 247)'></i>
+          </div>
+          <span style='margin-left: 20px'>Location (Vertices)</span>          
+      </div>
+      
+    <div id="map-container">
+        <div id="map"></div>
+        <div id="booking-form-container">
+            <form id="bookingForm">
+                <label class="label-top" for="origin">Origin:</label>
+                <select id="origin" name="origin">
+                    <option value="Batanes">Basco Airport Philippines (Batanes)</option>
+                    <option value="Tuguegarao">Tuguegarao International Airport (Tuguegarao)</option>
+                    <option value="Laoag">Laoag International Airport (Laoag City)</option>
+                    <option value="Manila">Ninoy Aquino Internatonal Airport (Pasay-Manila)</option>
+                    <option value="Legazpi">Legazpi Airport (Legazpi City)</option>
+                    <option value="Cebu">Mactan-Cebu International Airport (Cebu City)</option>
+                    <option value="Samar">Daniel Z. Romualdez International Airport (Samar-Leyte)</option>
+                    <option value="Palawan">Puerto Princesa International Airport (Palawan)</option>
+                    <option value="Surigao">Surigao Airport (Surigao City)</option>
+                    <option value="Zamboanga">Zamboanga International Airport (Zamboanga)</option>
+                    <option value="Davao">Davao International Airport (Davao City)</option>
+                    <option value="Tawi-Tawi">Sanga-Sanga Airport (Tawi-Tawi)</option>
+                </select>
+
+                <label class="label-top" for="destination">Destination:</label>
+                <select id="destination" name="destination">
+                    <option value="Batanes">Basco Airport Philippines (Batanes)</option>
+                    <option value="Tuguegarao">Tuguegarao International Airport (Tuguegarao)</option>
+                    <option value="Laoag">Laoag International Airport (Laoag City)</option>
+                    <option value="Manila">Ninoy Aquino Internatonal Airport (Pasay-Manila)</option>
+                    <option value="Legazpi">Legazpi Airport (Legazpi City)</option>
+                    <option value="Cebu">Mactan-Cebu International Airport (Cebu City)</option>
+                    <option value="Samar">Daniel Z. Romualdez International Airport (Samar-Leyte)</option>
+                    <option value="Palawan">Puerto Princesa International Airport (Palawan)</option>
+                    <option value="Surigao">Surigao Airport (Surigao City)</option>
+                    <option value="Zamboanga">Zamboanga International Airport (Zamboanga)</option>
+                    <option value="Davao">Davao International Airport (Davao City)</option>
+                    <option value="Tawi-Tawi">Sanga-Sanga Airport (Tawi-Tawi)</option>
+                </select>
+
+                <button id="book-flight" type="submit">Search Path</button>
+
+            </form>
+
+            <div id="result"></div>
+            <br><br>
+
+            <form id="flightInfoForm" class="hidden">
+                <center><h3>Book Flight</h3></center>
+                <label for="passengerName">Passenger Name:</label>
+                <input type="text" id="passengerName" name="passengerName" placeholder="Enter your name" required>
+                <br><br>
+                <label for="passengerAge">Passenger Age:</label>
+                <input type="number" id="passengerAge" name="passengerAge" placeholder="Enter your age" required>
+                <br><br>
+                <label for="departureDate">Departure Date:</label>
+                <input type="date" id="departureDate" name="departureDate" required>
+                <br><br>
+                <label for="returnDate">Return Date:</label>
+                <input type="date" id="returnDate" name="returnDate" required>
+                <br><br>
+                <div id="originDestinationDiv"></div>
+                <div id="totalAmount"></div>
+                <button id="confirm-booking" type="submit">Confirm Booking</button>
+                <button id="refreshButton">Book New</button>
+
+              </form>
+        
+        </div>
+    </div>
+    <canvas id="canvas"></canvas>
+    
+   
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="index.js"></script>
+    <script src="animation.js"></script>
+</body>
+</html>
