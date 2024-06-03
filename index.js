@@ -1,68 +1,102 @@
 function initMap() {
-    // Create map centered on the Philippines
-    var map = L.map('map').setView([12.8797, 121.7740], 6);
-    
-    // Add tile layer (map background)
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  // Create map centered on Asia
+  var map = L.map('map').setView([22.3193, 114.1694], 3);
+
+  // Add tile layer (map background)
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors'
-    }).addTo(map);
-  
-    // ip markers for cities
-    var cities = [
-      { name: "Manila", location: [14.513315623631144, 121.01619802849821] },
-      { name: "Cebu", location: [10.313677596389923, 123.97699188189858] },
-      { name: "Davao", location: [7.131033122977599, 125.645575142249] },
-      { name: "Palawan", location: [9.747786370452031, 118.74970284449402] },
-      { name: "Laoag", location: [18.18326438658606, 120.53201560718291] },
-      { name: "Tuguegarao", location: [17.67587023274542, 121.73390653847838] },
-      { name: "Legazpi", location: [13.15428017432601, 123.72959496397827] },
-      { name: "Zamboanga", location: [6.919943039596754, 122.06244176920495] },
-      { name: "Batanes", location: [20.544507635679466, 121.95251987413204] },
-      { name: "Samar", location: [11.233194298664362, 125.02428994917288] },
-      { name: "Surigao", location:[9.760481380191024, 125.48207764991838]},
-      { name: "Tawi-Tawi", location:[5.048574790489617, 119.74283390153032]}
-    ];
-  
-    cities.forEach(function (city) {
+  }).addTo(map);
+
+  // ip markers for cities in Asia
+  var cities = [
+    { name: "Hong Kong", location: [22.3193, 114.1694] },
+    { name: "Tokyo", location: [35.6895, 139.6917] },
+    { name: "Seoul", location: [37.5665, 126.978] },
+    { name: "Beijing", location: [39.9042, 116.4074] },
+    { name: "Bangkok", location: [13.7563, 100.5018] },
+    { name: "Singapore", location: [1.3521, 103.8198] },
+    { name: "Manila", location: [14.5995, 120.9842] },
+    { name: "Jakarta", location: [-6.2088, 106.8456] },
+    { name: "Taipei", location: [25.033, 121.5654] },
+    { name: "Mumbai", location: [19.076, 72.8777] },
+    { name: "Dubai", location: [25.276987, 55.296249] },
+    { name: "Istanbul", location: [41.0082, 28.9784] },
+    { name: "Cairo", location: [30.0444, 31.2357] }
+];
+
+  cities.forEach(function (city) {
       L.marker(city.location).addTo(map).bindPopup(city.name);
-    });
-  
-    // Add flight connections between cities
-    var connections = [
-      { origin: "Manila", destination: "Cebu", cost: 1000, duration: "1 hour" },
-      { origin: "Cebu", destination: "Manila", cost: 1000, duration: "1 hour" },
-      { origin: "Manila", destination: "Zamboanga", cost: 2000, duration: "2 hours" },
-      { origin: "Zamboanga", destination: "Manila", cost: 2000, duration: "2 hours" },
-      { origin: "Cebu", destination: "Davao", cost: 1500, duration: "1.5 hours" },
-      { origin: "Davao", destination: "Cebu", cost: 1500, duration: "1.5 hours" },
-      { origin: "Manila", destination: "Palawan", cost: 1800, duration: "1.8 hours" },
-      { origin: "Palawan", destination: "Manila", cost: 1800, duration: "1.8 hours" },
-      { origin: "Laoag", destination: "Manila", cost: 2500, duration: "2.5 hours" },
-      { origin: "Manila", destination: "Laoag", cost: 2500, duration: "2.5 hours" },
-      { origin: "Tuguegarao", destination: "Manila", cost: 3000, duration: "3 hours" },
-      { origin: "Manila", destination: "Tuguegarao", cost: 3000, duration: "3 hours" },
-      { origin: "Cebu", destination: "Zamboanga", cost: 2200, duration: "2.2 hours" },
-      { origin: "Zamboanga", destination: "Cebu", cost: 2200, duration: "2.2 hours" },
-      { origin: "Legazpi", destination: "Tuguegarao", cost: 3200, duration: "3.2 hours" },
-      { origin: "Tuguegarao", destination: "Legazpi", cost: 3200, duration: "3.2 hours" },
-      { origin: "Legazpi", destination: "Manila", cost: 2100, duration: "2.1 hours" },
-      { origin: "Manila", destination: "Legazpi", cost: 2100, duration: "2.1 hours" },
-      { origin: "Palawan", destination: "Zamboanga", cost: 2300, duration: "2.3 hours" },
-      { origin: "Zamboanga", destination: "Palawan", cost: 2300, duration: "2.3 hours" },
-      { origin: "Laoag", destination: "Tuguegarao", cost: 2700, duration: "2.7 hours" },
-      { origin: "Tuguegarao", destination: "Laoag", cost: 2700, duration: "2.7 hours" },
-      { origin: "Laoag", destination: "Palawan", cost: 3500, duration: "3.5 hours" },
-      { origin: "Palawan", destination: "Laoag", cost: 3500, duration: "3.5 hours" },
-      { origin: "Batanes", destination: "Tuguegarao", cost: 4000, duration: "4 hours" },
-      { origin: "Tuguegarao", destination: "Batanes", cost: 4000, duration: "4 hours" },
-      { origin: "Samar", destination: "Manila", cost: 2800, duration: "2.8 hours" },
-      { origin: "Manila", destination: "Samar", cost: 2800, duration: "2.8 hours" },
-      { origin: "Surigao", destination: "Cebu", cost: 1200, duration: "1 hours" },
-      { origin: "Cebu", destination: "Surigao", cost: 1200, duration: "1 hours" },
-      { origin: "Tawi-Tawi", destination: "Zamboanga", cost: 3500, duration: "1 hours" },
-      { origin: "Zamboanga", destination: "Tawi-Tawi", cost: 3500, duration: "1 hours" },
-    ];
-    
+  });
+
+  // Add flight connections between cities
+  var connections = [
+    { origin: "Hong Kong", destination: "Tokyo", cost: 2000, duration: "4 hours" },
+    { origin: "Tokyo", destination: "Hong Kong", cost: 2000, duration: "4 hours" },
+
+    { origin: "Hong Kong", destination: "Beijing", cost: 2000, duration: "4 hours" },
+    { origin: "Beijing", destination: "Hong Kong", cost: 2000, duration: "4 hours" },
+
+    { origin: "Tokyo", destination: "Seoul", cost: 2500, duration: "2 hours" },
+    { origin: "Seoul", destination: "Tokyo", cost: 2500, duration: "2 hours" },
+
+    { origin: "Beijing", destination: "Bangkok", cost: 2200, duration: "5 hours" },
+    { origin: "Bangkok", destination: "Beijing", cost: 2200, duration: "5 hours" },
+
+    { origin: "Bangkok", destination: "Singapore", cost: 1000, duration: "2 hours" },
+    { origin: "Singapore", destination: "Bangkok", cost: 1000, duration: "2 hours" },
+
+    { origin: "Singapore", destination: "Manila", cost: 1200, duration: "3 hours" },
+    { origin: "Manila", destination: "Singapore", cost: 1200, duration: "3 hours" },
+
+    { origin: "Jakarta", destination: "Taipei", cost: 1800, duration: "3 hours" },
+    { origin: "Taipei", destination: "Jakarta", cost: 1800, duration: "3 hours" },
+
+    { origin: "Taipei", destination: "Mumbai", cost: 3000, duration: "4 hours" },
+    { origin: "Mumbai", destination: "Taipei", cost: 3000, duration: "4 hours" },
+
+    { origin: "Mumbai", destination: "Dubai", cost: 2500, duration: "3 hours" },
+    { origin: "Dubai", destination: "Mumbai", cost: 2500, duration: "3 hours" },
+
+    { origin: "Dubai", destination: "Istanbul", cost: 2800, duration: "4 hours" },
+    { origin: "Istanbul", destination: "Dubai", cost: 2800, duration: "4 hours" },
+
+    { origin: "Istanbul", destination: "Cairo", cost: 1500, duration: "2.5 hours" },
+    { origin: "Cairo", destination: "Istanbul", cost: 1500, duration: "2.5 hours" },
+
+    { origin: "Cairo", destination: "Hong Kong", cost: 3200, duration: "6 hours" },
+    { origin: "Hong Kong", destination: "Cairo", cost: 3200, duration: "6 hours" },
+
+    { origin: "Beijing", destination: "Istanbul", cost: 2800, duration: "4 hours" },
+    { origin: "Istanbul", destination: "Beijing", cost: 2800, duration: "4 hours" },
+
+    { origin: "Dubai", destination: "Singapore", cost: 2000, duration: "3 hours" },
+    { origin: "Singapore", destination: "Dubai", cost: 2000, duration: "3 hours" },
+
+    { origin: "Taipei", destination: "Hong Kong", cost: 1200, duration: "2 hours" },
+    { origin: "Hong Kong", destination: "Taipei", cost: 1200, duration: "2 hours" },
+
+    { origin: "Hong Kong", destination: "Manila", cost: 1300, duration: "2.5 hours" },
+    { origin: "Manila", destination: "Hong Kong", cost: 1300, duration: "2.5 hours" },
+
+    { origin: "Manila", destination: "Singapore", cost: 1200, duration: "3 hours" },
+    { origin: "Singapore", destination: "Manila", cost: 1200, duration: "3 hours" },
+
+    { origin: "Manila", destination: "Tokyo", cost: 1200, duration: "3 hours" },
+    { origin: "Tokyo", destination: "Manila", cost: 1200, duration: "3 hours" },
+
+    { origin: "Singapore", destination: "Bangkok", cost: 800, duration: "1.5 hours" },
+    { origin: "Bangkok", destination: "Singapore", cost: 800, duration: "1.5 hours" },
+
+    { origin: "Bangkok", destination: "Dubai", cost: 2500, duration: "4 hours" },
+    { origin: "Dubai", destination: "Bangkok", cost: 2500, duration: "4 hours" },
+
+    { origin: "Dubai", destination: "Mumbai", cost: 3000, duration: "4 hours" },
+    { origin: "Mumbai", destination: "Dubai", cost: 3000, duration: "4 hours" },
+
+    { origin: "Mumbai", destination: "Taipei", cost: 3500, duration: "5 hours" },
+    { origin: "Taipei", destination: "Mumbai", cost: 3500, duration: "5 hours" }
+];
+
     //Connect cities for possible path (red line)
     connections.forEach(function (connection) {
       var origin = cities.find(function (city) {
@@ -73,7 +107,7 @@ function initMap() {
         return city.name === connection.destination;
       });
   
-      L.polyline([origin.location, destination.location], { color: 'red', weight: 2 }).addTo(map);
+      L.polyline([origin.location, destination.location], { color: 'yellow', weight: 2 }).addTo(map);
     });
   
 // Handle form submission
@@ -144,7 +178,6 @@ document.getElementById('bookingForm').addEventListener('submit', function (even
   const bookFlightButton = document.getElementById('book-flight');
   bookFlightButton.addEventListener('click', toggleFlightInfoForm);
 
-  //TICKET POP UP
   // Event listener for the confirm-booking button
   const confirmBookingButton = document.getElementById('confirm-booking');
   confirmBookingButton.addEventListener('click', function (event) {
@@ -193,37 +226,31 @@ function generateRandomReferenceNumber() {
   return referenceNumber;
 }
 
-// Function to show ticket details in a pop-up
+// Function to show ticket details in a SweetAlert modal
 function showTicketPopup(details) {
   const totalAmount = document.getElementById('totalAmount').textContent;
   const seatNumber = generateRandomSeatNumber();
   const flightNumber = generateRandomFlightNumber();
   const referenceNumber = generateRandomReferenceNumber();
 
-  const popup = document.createElement('div');
-  popup.classList.add('ticket-popup');
+  const message = `
+      ${details}<br>
+      <b>Origin:</b> ${getOrigin()}<br>
+      <b>Destination:</b> ${getDestination()}<br>
+      <b>Seat Number:</b> ${seatNumber}<br>
+      <b>Flight Number:</b> ${flightNumber}<br>
+      <b>Reference Number:</b> ${referenceNumber}<br>
+      <b>Total Amount:</b> ${totalAmount}
+  `;
 
-  // Create and append the title element
-  const title = document.createElement('h1');
-  title.textContent = 'Philippines AirAsia';
-  popup.appendChild(title);
-
-  // Create and append the ticket details
-  const ticketDetails = document.createElement('h3');
-  ticketDetails.textContent = details + 'Origin: ' + getOrigin() + '\nDestination: ' + getDestination()  + '\n\nSeat Number: ' + seatNumber + '\nFlight Number: ' + flightNumber + '\nReference Number: ' + referenceNumber + '\nTotal Amount: ' + totalAmount;
-  popup.appendChild(ticketDetails);
-
-  // Create and append the thank you message
-  const thankYouMessage = document.createElement('h3');
-  thankYouMessage.textContent = 'Have a safe flight!';
-  popup.appendChild(thankYouMessage);
-
-  document.body.appendChild(popup);
-
-  // Remove the pop-up after a certain time (e.g., 10 seconds)
-  setTimeout(function () {
-    popup.remove();
-  }, 8000);
+  // Show the SweetAlert modal
+  Swal.fire({
+      icon: 'success',
+      title: 'Booking Confirmed!',
+      html: message,
+      showConfirmButton: false,
+      timer: 8000 // Close the modal after 8 seconds
+  });
 }
 
 // Function to get the selected origin
@@ -343,13 +370,13 @@ function animateFlightPath(path) {
   }
   
   
-  // Print the result or the output    
   function printResult(path) {
     var resultContainer = document.getElementById('result');
     var resultHTML = 'Shortest Path: ';
   
     var totalCost = 0;
     var totalDuration = 0;
+    var totalDistance = 0; // Initialize total distance
   
     for (var i = 0; i < path.length; i++) {
       resultHTML += path[i].name;
@@ -357,7 +384,7 @@ function animateFlightPath(path) {
       if (i < path.length - 1) {
         resultHTML += ' &#8594; ';
   
-        // Calculate total cost and duration
+        // Calculate total cost, duration, and distance
         var connection = connections.find(function (conn) {
           return (
             (conn.origin === path[i].name && conn.destination === path[i + 1].name) ||
@@ -368,12 +395,19 @@ function animateFlightPath(path) {
         if (connection) {
           totalCost += connection.cost;
           totalDuration += parseFloat(connection.duration); // Parse duration as a floating-point number
+  
+          // Calculate distance between cities
+          var origin = path[i];
+          var destination = path[i + 1];
+          var distance = calculateDistance(origin.location[0], origin.location[1], destination.location[0], destination.location[1]);
+          totalDistance += distance;
         }
       }
     }
   
     resultHTML += '<br>Total Amount: ' + ' ₱ ' + totalCost ;
-    //resultHTML += '<br>Total Duration: ' + totalDuration.toFixed(2) + ' hours'; // Use toFixed() to display two decimal places
+    resultHTML += '<br>Total Distance: ' + totalDistance.toFixed(2) + ' km'; // Display total distance in kilometers with two decimal places
+    resultHTML += '<br>Total Duration: ' + totalDuration.toFixed(2) + ' hours'; // Use toFixed() to display two decimal places
   
     resultContainer.innerHTML = resultHTML;
   
@@ -387,7 +421,22 @@ function animateFlightPath(path) {
     bookFlightBtn.classList.remove('hidden');
     flightInfoForm.classList.add('show');
   }
-  
+
+// Function to calculate the distance between two points given their latitude and longitude using the Haversine formula
+function calculateDistance(lat1, lon1, lat2, lon2) {
+    var R = 6371; // Radius of the Earth in kilometers
+    var dLat = deg2rad(lat2 - lat1);
+    var dLon = deg2rad(lon2 - lon1);
+    var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    var d = R * c; // Distance in kilometers
+    return d;
+}
+
+function deg2rad(deg) {
+    return deg * (Math.PI / 180);
+}
+
 }
 
   // MAP LOAD
@@ -395,30 +444,6 @@ function animateFlightPath(path) {
     initMap();
   };
   
-  // Show the flight information form popup
-  function showPopup() {
-        var popupContainer = document.getElementById('popup-container');
-        popupContainer.style.display = 'flex';
-      }
-
-  // Hide the flight information form popup
-  function hidePopup() {
-    var popupContainer = document.getElementById('popup-container');
-    popupContainer.style.display = 'none';
-  }
-  
-  // Event listener for the "Confirm Booking" button
-  var confirmBookingButton = document.getElementById('confirm-booking');
-  confirmBookingButton.addEventListener('click', function(event) {
-    event.preventDefault(); // Prevent form submission
-
-    // Hide the popup after processing the form
-    hidePopup();
-  });
-  // Call the hidePopup function to hide the popup initially
-  hidePopup();
-
-
   // Add event listener to the refresh button
 document.getElementById('refreshButton').addEventListener('click', function() {
   // Reload the page
